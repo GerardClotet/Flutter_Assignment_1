@@ -1,0 +1,18 @@
+SHORCUTS
+
+ctrl + alt + d -> devtools
+
+alt + shit + f -> text format
+
+ctrl + space -> vars and children
+
+ctrl + . -> add widget
+
+
+FLUTTER CMD
+
+flutter emulators --launch emulator_id
+
+flutter create (name)
+
+code . ->open in code folder
