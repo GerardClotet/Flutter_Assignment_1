@@ -8,7 +8,7 @@ ctrl + space -> vars and children
 
 ctrl + . -> add widget
 
-
+ctr + shift + p -> comands
 FLUTTER CMD
 
 flutter emulators --launch emulator_id
