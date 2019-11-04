@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(SaludoApp()); //textediting input
+  //runApp(CounterApp()); //Counter
+  //runApp(MuestrarioApp()); //buttons
+}
+
 // -----COUNTER-----//
 //------------------//
-// void main() {
-//   runApp(CounterApp());
-// }
 
 class CounterApp extends StatelessWidget {
   @override
@@ -58,9 +61,8 @@ class _CounterPageState extends State<CounterPage> {
 //------------------//
 // -----COUNTER-----//
 
-void main() {
-  runApp(MuestrarioApp());
-}
+// -----BUTTON-----//
+//------------------//
 
 class MuestrarioApp extends StatelessWidget {
   @override
@@ -175,7 +177,7 @@ class MuestrarioApp extends StatelessWidget {
             ),
             Muestra(
               child: FloatingActionButton(
-                onPressed: (){},
+                onPressed: () {},
                 child: Icon(Icons.query_builder),
               ),
               text: 'Icon button & tooltip',
@@ -217,6 +219,101 @@ class Muestra extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+// -----BUTTON-----//
+//------------------//
+
+//SALUDO
+
+class SaludoApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.pink),
+      home: SaludoScreen(),
+    );
+  }
+}
+
+class SaludoScreen extends StatefulWidget {
+  @override
+  _SaludoScreenState createState() => _SaludoScreenState();
+}
+
+class _SaludoScreenState extends State<SaludoScreen> {
+  TextEditingController _controller;
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Saludo'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              //on hi ha el input text
+
+              controller: _controller,
+              decoration: InputDecoration(
+                filled: true,
+                labelText: 'Name',
+                suffix: IconButton(
+                  icon: Icon(Icons.backspace),
+                  onPressed: (){
+                    _controller.clear();
+                  },
+                )
+              ),
+              onSubmitted: (String finaltext) {
+                _saluda(context, finaltext);
+              },
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: RaisedButton(
+                child: Text('Borrar'),
+                onPressed: () {
+                   if(_controller.text.isNotEmpty)
+                  {
+                  _controller.clear();
+                  }
+                },
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: RaisedButton(
+                child: Text('Saluda'),
+                onPressed: () {
+                  if(_controller.text.isNotEmpty)
+                  {
+                  _saluda(context, _controller.text);
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future _saluda(BuildContext context, String finaltext) {
+
+    return showDialog(
+      context: context, //posicion en el arbol de widgets
+      builder: (context) => AlertDialog(
+        title: Text('Hi, $finaltext'),
       ),
     );
   }
