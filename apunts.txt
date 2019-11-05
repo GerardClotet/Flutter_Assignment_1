@@ -1,3 +1,8 @@
+SETUP
+variables entorno PATH 
+C:\flutter\bin\cache\dart-sdk\bin
+C:\flutter\bin
+
 SHORCUTS
 
 ctrl + alt + d -> devtools
@@ -48,6 +53,10 @@ tmbe es pot buildejar directament la seguen pagina
                   builder: (context) => EditScreen(_texto),
                 ))
                     .then((result) {
+
+Al widget State posar un initState o un didChangeDependencies
+per agafar-ho a dintre de la funcio
+final Color color = ModalRoute.of(context).settings.arguments; et torna els arguments passats al push
 
 ALERT DIALOG
 
