@@ -91,7 +91,7 @@ El SetState s'ha de posar al widget build, dintre del alguna funcio tipo onPress
 
 
 Es pot posar com a home la classe stateful
-es pot agafar el style definit al materialApp
+es pot agafar el style definit al materialApp node pare
 e.g dintre dun Text  style: Theme.of(context).textTheme.display4,
 
 
@@ -122,7 +122,8 @@ Widget tipos card (un estil nice) ->child: tipos de boto,
 RaisedButton
 IconButton
 OutlineButtonBackButton
-
+FloatingButtong etc
+FlatButton
 metodes guays:
 onPressed(); // sino te aquesta funcio es un boto que logica i visualment no es pot pulsar per aqui es retorna la info
 shape: (stadiumborder nice)
