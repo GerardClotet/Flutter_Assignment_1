@@ -23,6 +23,114 @@ flutter create (name)
 code . ->open in code folder
 
 
+DART
+
+declarar var en els constructors 
+class Muestra extends StatelessWidget {
+  final Widget child;
+  final String text;
+  const Muestra({
+    Key key,
+    @required this.child,
+    @required this.text,
+  }) : super(key: key);
+
+@required, necesari omplir
+
+
+exemple classe apart
+class Trip {
+  String loc_name, description, descAsset, profile_pic, big_pic;
+  int cost;
+  Trip({
+    this.loc_name,
+    this.description,
+    this.descAsset,
+    this.profile_pic,
+    this.big_pic,
+    this.cost,
+  });
+}
+
+final santorini = Trip(
+  loc_name: 'Santorini',
+  cost: 1450,
+  description: 'Things to do in Santorini Greece. Discover the most Romantinc Holiday destination in Greece.',
+  profile_pic: 'assets/profile_pic.png',
+  big_pic: 'assets/background.jpg',
+  descAsset: 'assets/desc_asset.jpg',
+);
+
+
+Despres aquesta funcio es crida tipo
+
+lass Top extends StatelessWidget {
+  final Trip trip;
+  Top(this.trip);
+
+llavors dintre de la classe ja es fa servir la variable this.trip
+
+
+
+
+
+
+
+
+
+
+STATEFUL
+//stateful no es estatico permite canviar mientras runApp esta activo
+
+classe state derivada de statefultwidget
+// classe asociada al estado del stateful widget
+initState() // a la classe asociada inicialitza el estat
+
+
+El SetState s'ha de posar al widget build, dintre del alguna funcio tipo onPressed() / onTap() (aquesta es del GestureDectector
+
+
+Es pot posar com a home la classe stateful
+es pot agafar el style definit al materialApp
+e.g dintre dun Text  style: Theme.of(context).textTheme.display4,
+
+
+INCISO EN COM PASAR COSES
+crear variable al State
+ferli el seu init al InitState // previ al widget build(BuildContext
+GRID
+e.g home Scaffold -> body: GridView.count( // et fa grid automaticament del que sigui
+metodes crossAxisCount: num per fila
+childAspectRatio : tamany
+ i children[] de widgets
+
+REBRE TEXT DESDE UN TECLAT
+TextField Widget pare 
+metode
+controller: TextEditingController controla el text pilla input igualem la variable creada 
+onSubmited : retorna una funcio String amb el text 
+
+Pots  pasarli una funcio de tipus future amb el build context tipo context: context, builder: (context) => widget
+O guardarte directament la variable string i treurela per un altre lloc.
+EXPANDED
+Posar com a fills duna row / columns que contenen un widget dintre , metode flex es controla el ratio
+
+
+BUTTONS
+Widget tipos card (un estil nice) ->child: tipos de boto,
+
+RaisedButton
+IconButton
+OutlineButtonBackButton
+
+metodes guays:
+onPressed(); // sino te aquesta funcio es un boto que logica i visualment no es pot pulsar per aqui es retorna la info
+shape: (stadiumborder nice)
+label:
+highlightcolor:
+tooltip:
+
+
 
 PASSAR ENTRE PAGINES
 
@@ -66,4 +174,17 @@ agafar el buildcontext amb metode context
 barrierDismissible:false -> no surt si cliques for
 buildejar alert title: (context) =>Alertdialog( // com si fos un container 
 
+USER LIST
 
+home scaffold -> body Func
+Utilitzar stateful
+List<class> list;
+Fer.ho be! Ferse una llista de una classe que contingui que el vulguem, 
+fer el initState inicialitzant cada valor de la llista
+
+El widget retorna ListView.builder
+metode itemBuilder: (context, index)
+metode retorna ListTile(
+se li passen parametres eg title: Text(list[index].classVar,
+
+metode itemCount: list.lenth -> per generar la llista amb la lenght justa
