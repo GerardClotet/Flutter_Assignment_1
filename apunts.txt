@@ -16,3 +16,45 @@ flutter emulators --launch emulator_id
 flutter create (name)
 
 code . ->open in code folder
+
+
+
+PASSAR ENTRE PAGINES
+
+posar un botto
+func -> on pressed(){
+Navigator.of(context).pop(//es pot passar valors a dintre) ->retorna enrere en l'arbre de widgets
+Navigator.of(context).push / 
+
+Si s'inialitza amb strings
+routes:
+{
+
+pushNamed( '/page1' : (context) => Class
+pushNamed( '/page2' : (context) => Class
+}
+
+S'ha de fer push desde la primera a la segona pagina ex Navigator.of(context).pushNamed('/page2',... (si es vol))
+
+Els pops i push poden retorna futuribles com ...pushNamed(...,...,arguments: (valor a passar a la seguent pagina)).then((result){  _valor = result}) //NOMES AL PUSH
+
+
+El pop fa callback del futurible enviat al principi pel then i retorna el result
+tmbe es pot buildejar directament la seguen pagina 
+
+
+ Navigator.of(context)
+                    .push(MaterialPageRoute(
+                  builder: (context) => EditScreen(_texto),
+                ))
+                    .then((result) {
+
+ALERT DIALOG
+
+Func -> ShowDialog()
+agafar el buildcontext amb metode context
+
+barrierDismissible:false -> no surt si cliques for
+buildejar alert title: (context) =>Alertdialog( // com si fos un container 
+
+
