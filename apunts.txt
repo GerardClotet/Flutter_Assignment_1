@@ -98,6 +98,7 @@ e.g dintre dun Text  style: Theme.of(context).textTheme.display4,
 INCISO EN COM PASAR COSES
 crear variable al State
 ferli el seu init al InitState // previ al widget build(BuildContext
+
 GRID
 e.g home Scaffold -> body: GridView.count( // et fa grid automaticament del que sigui
 metodes crossAxisCount: num per fila
