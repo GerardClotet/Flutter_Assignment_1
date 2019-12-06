@@ -1,6 +1,6 @@
 import 'package:country_list/countries.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
+
 
 void main() {
   LoadCountries();
@@ -29,6 +29,7 @@ class MainPage extends StatelessWidget {
             child: Text('Escoge Pais'),
             onPressed: () {
               chooseCountry(context).then((country) {
+                
                 Scaffold.of(context)
                   ..removeCurrentSnackBar()
                   ..showSnackBar(SnackBar(

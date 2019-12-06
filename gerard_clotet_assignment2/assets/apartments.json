@@ -1,0 +1,32 @@
+{
+    "houses": [
+        {
+            "user": "Alexei Dromanov",
+            "loc_name": "Santorini",
+            "description": "Things to do in Santorini Greece. Discover the most Romantinc Holiday destination in Greece.",
+            "profile_pic": "assets/profile_pic.png",
+            "big_pic": "assets/background.jpg",
+            "descAsset": "assets/desc_asset.jpg",
+            "cost" : "1450"
+        },
+        {
+            "user": "Juan Lopez",
+            "loc_name": "Barcelona",
+            "description": "Barcelona capital of weed is opened to anyone with money and steel liver .",
+            "profile_pic": "assets/barna_profilepic.jpg",
+            "big_pic": "assets/barna_background.jpg",
+            "descAsset": "assets/desc_barna.png",
+            "cost" : "900"
+        },
+
+        {
+            "user": "Billet Pujol",
+            "loc_name": "New York",
+            "description": "Things to do in Santorini Greece. Discover the most Romantinc Holiday destination in Greece.",
+            "profile_pic": "assets/NY_profile_pic.jpg",
+            "big_pic": "assets/backgroundNY.jpg",
+            "descAsset": "assets/desc_NY.jpg",
+            "cost" : "2000"
+        }
+    ]
+}

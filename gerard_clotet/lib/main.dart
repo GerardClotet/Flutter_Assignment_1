@@ -505,6 +505,7 @@ class Top extends StatelessWidget {
 
 class myIcon extends StatelessWidget {
   final Icons icon;
+  
   myIcon(this.icon);
   @override
   Widget build(BuildContext context) {

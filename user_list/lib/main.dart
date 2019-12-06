@@ -1,10 +1,8 @@
-import 'dart:convert' as prefix0;
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'dart:async' show Future;
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:http/http.dart' as http;
 
 //import 'package:htt'
 void main() => runApp(UserListApp());
@@ -21,25 +19,19 @@ class UserListApp extends StatelessWidget {
   }
 }
 
-class UserList extends StatefulWidget {
-  @override
-  _UserListState createState() => _UserListState();
-}
-
 class User {
   //classe apart
   String fullname, username, photoUrl;
   User(this.fullname, this.username, this.photoUrl);
-  User.fromJson(Map<String, dynamic> json) {
-    fullname =
-    json['name']['first'] +
-        '' +
-        json['name']['last']; // : operator used in maps
-    username =
-    json['login']['username'];
-    photoUrl =
-    json['picture']['medium']; //agafes name i value amb el map
-  }
+  User.fromJson(Map<String, dynamic> json)
+      : fullname = json['name']['first'] + ' ' + json['name']['last'],
+        username = json['login']['username'],
+        photoUrl = json['picture']['medium'];
+}
+
+class UserList extends StatefulWidget {
+  @override
+  _UserListState createState() => _UserListState();
 }
 
 class _UserListState extends State<UserList> {
@@ -48,19 +40,21 @@ class _UserListState extends State<UserList> {
   void initState() {
     users = [];
     loading = true;
-    _loadUsersData();
+    
     _loadUser();
 
     super.initState();
   }
 
-  Future<String> _loadUsersData() async {
-    return await rootBundle.loadString('assets/UserList.json');
-  }
+  
 
   void _loadUser() async {
-    String jsonString = await _loadUsersData();
-    final json = prefix0.json.decode(jsonString);
+
+    
+    final respones = await http.get('https://randomuser.me/api/?results=20');
+    final json = jsonDecode(respones.body);
+
+
     List<User> _users = [];
     for (var json_user in json['results']) {
       _users.add(User.fromJson(json_user));
@@ -72,13 +66,21 @@ class _UserListState extends State<UserList> {
     });
   }
 
+  //aqui es el return
   @override
   Widget build(BuildContext context) {
+    if(loading)
+    {
+      return Center(child : CircularProgressIndicator());
+    }
     return ListView.builder(
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(users[index].fullname),
           subtitle: Text(users[index].username),
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(users[index].photoUrl),
+          ),
         );
       },
       itemCount: users.length,
