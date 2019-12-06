@@ -41,8 +41,7 @@ class _ShopCartPageState extends State<ShopCartPage> {
   }
 
   Future<void> _loadCart() async {
-    //aixo s'haura de treure
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 6));
 
     try {
       Directory dir = await getApplicationDocumentsDirectory();
