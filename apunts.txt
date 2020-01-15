@@ -192,6 +192,33 @@ se li passen parametres eg title: Text(list[index].classVar,
 metode itemCount: list.lenth -> per generar la llista amb la lenght justa
 
 
+FUTURE
+ Funcio Future<String> FuncioTal() async{ return "hola";}
+
+la crides -> FuncioTal.then((var){  //var es el return de la funcio
+print (var) //Seria un string var
+});
+
+el then assegura que esta completed, llavors es crida lo de dins de la funcio.
+
+Llegir fitxer amb future:
+File file = File('fitxer.dart');
+file.readAsString().then((content){});
+
+AWAIT FUTURE
+Future<String> nombreFichero() async {return "await.dart";}
+
+Future<void> muestraFichero() async { //funcion async, acabara cuando lo tenga que hacer
+  String filename = await nombreFichero(); //await solo puede estar en funciones async
+  String content = await File(filename).readAsStringSync();
+  print(content);}
+
+main() { muestraFichero(); print("fin");}
+
+
+
+
+
 FIREBASE
 
 package cloudfirestore
