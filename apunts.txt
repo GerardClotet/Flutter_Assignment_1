@@ -98,13 +98,13 @@ e.g dintre dun Text  style: Theme.of(context).textTheme.display4,
 INCISO EN COM PASAR COSES
 crear variable al State
 ferli el seu init al InitState // previ al widget build(BuildContext
-
+//---------------------------//
 GRID
 e.g home Scaffold -> body: GridView.count( // et fa grid automaticament del que sigui
 metodes crossAxisCount: num per fila
 childAspectRatio : tamany
  i children[] de widgets
-
+//-----------------------------//
 REBRE TEXT DESDE UN TECLAT
 TextField Widget pare 
 metode
@@ -113,10 +113,11 @@ onSubmited : retorna una funcio String amb el text
 
 Pots  pasarli una funcio de tipus future amb el build context tipo context: context, builder: (context) => widget
 O guardarte directament la variable string i treurela per un altre lloc.
+//---------------------------------------//
 EXPANDED
 Posar com a fills duna row / columns que contenen un widget dintre , metode flex es controla el ratio
 
-
+//------------------------------//
 BUTTONS
 Widget tipos card (un estil nice) ->child: tipos de boto,
 
@@ -132,7 +133,7 @@ label:
 highlightcolor:
 tooltip:
 
-
+//-------------------------------------------------//
 
 PASSAR ENTRE PAGINES
 
@@ -168,6 +169,7 @@ Al widget State posar un initState o un didChangeDependencies
 per agafar-ho a dintre de la funcio
 final Color color = ModalRoute.of(context).settings.arguments; et torna els arguments passats al push
 
+//----------------------------------------//
 ALERT DIALOG
 
 Func -> ShowDialog()
@@ -176,6 +178,7 @@ agafar el buildcontext amb metode context
 barrierDismissible:false -> no surt si cliques for
 buildejar alert title: (context) =>Alertdialog( // com si fos un container 
 
+//-----------------------//
 USER LIST
 
 home scaffold -> body Func
@@ -192,6 +195,7 @@ se li passen parametres eg title: Text(list[index].classVar,
 metode itemCount: list.lenth -> per generar la llista amb la lenght justa
 
 
+//--------------------------------------------//
 FUTURE
  Funcio Future<String> FuncioTal() async{ return "hola";}
 
@@ -215,9 +219,39 @@ Future<void> muestraFichero() async { //funcion async, acabara cuando lo tenga q
 
 main() { muestraFichero(); print("fin");}
 
+FUTURE BUILDER
 
+class App extends StatelessWidget {
 
+Future<String> _cargaDatos() async{
+  await Future.delayed(Duration(seconds: 5));
+  return await rootBundle.loadString('assets/datos.txt');
+}
 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+          appBar: AppBar(title: Text('Future Builder')),
+          body: FutureBuilder(
+            future: _cargaDatos(),
+            builder: (context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                    child: Text('ERROR: ${snapshot.error.toString()}'));
+              }
+              if (!snapshot.hasData) {
+                //
+                return Center(child: CircularProgressIndicator());
+              }
+              return Center(child: Text(snapshot.data));
+            },
+          )),
+    );
+  }
+}
+
+//--------------------------------------//
 
 FIREBASE
 
