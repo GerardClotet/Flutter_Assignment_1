@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/db.dart' as db;
 import 'package:whatsapp/model/group.dart';
+import 'package:whatsapp/widgets/group_tile.dart';
 
 class GrouPage extends StatelessWidget {
   @override
@@ -21,12 +22,19 @@ class GrouPage extends StatelessWidget {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           }
-
           List<Group> groups = snapshot.data;
-          return ListView.builder(
+          return ListView.separated(
             itemCount: groups.length,
             itemBuilder: (context, index) {
-              return ListTile(title: Text(groups[index].name));
+              final Group group = groups[index];
+              return GroupTile(group: group);
+            },
+            separatorBuilder: (context, index) {
+              return Divider(
+                height: 1,
+                indent: 70,
+                endIndent: 15,
+              );
             },
           );
         },
