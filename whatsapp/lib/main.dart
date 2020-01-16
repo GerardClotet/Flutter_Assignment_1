@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/pages/group_page.dart';
+import 'package:whatsapp/pages/chat_page.dart';
 
 void main() => runApp(FireBaseWhatsApp());
 
@@ -13,6 +14,7 @@ class FireBaseWhatsApp extends StatelessWidget {
         ),
        routes: {
          '/' : (context) =>GrouPage(),
+         '/chat' : (context) => ChatPage(),
        },
     );
   }

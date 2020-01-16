@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/db.dart' as db;
 import 'package:whatsapp/model/group.dart';
-import 'package:whatsapp/widgets/group_list.dart';
+import 'package:whatsapp/model/message.dart';
 import 'package:whatsapp/widgets/loading.dart';
+import 'package:whatsapp/widgets/message_list.dart';
 import 'package:whatsapp/widgets/red_error.dart';
 
-class GrouPage extends StatelessWidget {
+class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final Group group = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: AppBar(title: Text("Whatsapp")),
+      appBar: AppBar(title: Text(group.name)),
       body: StreamBuilder(
-        stream: db.getGroups(),
-        builder: (context, AsyncSnapshot<List<Group>> snapshot) {
+        stream: db.getGroupMessages(group.id),
+        builder: (context, AsyncSnapshot<List<Message>> snapshot) {
           if (snapshot.hasError) {
             return RedError(snapshot.error);
           }
+
           if (!snapshot.hasData) {
             return Loading();
           }
-          List<Group> groups = snapshot.data;
-          return GroupList(groups: groups);
+
+          return MessageList(messages: snapshot.data);
         },
       ),
     );
