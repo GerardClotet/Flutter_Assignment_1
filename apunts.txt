@@ -169,6 +169,27 @@ Al widget State posar un initState o un didChangeDependencies
 per agafar-ho a dintre de la funcio
 final Color color = ModalRoute.of(context).settings.arguments; et torna els arguments passats al push
 
+
+
+NEw WAY
+
+ floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context)
+              .push(
+            MaterialPageRoute(
+              builder: (_) => NewTodoPage(),
+            ),
+          )
+              .then((what) {
+            setState(() {
+              _todos.add(Todo(what));
+            });
+          });
+        },
+      ),
+
 //----------------------------------------//
 ALERT DIALOG
 
@@ -250,6 +271,102 @@ Future<String> _cargaDatos() async{
     );
   }
 }
+
+//-------------------------------------------//
+JSON (es necessita el path_provider)
+
+LLegir
+
+class _LocationsListState extends State<LocationsList> {
+  bool loading;
+  List<Apartment> apartments;
+  @override
+  void initState() {
+    apartments = [];
+    loading = true;
+    _loadApartments();
+    super.initState();
+  }
+
+  void _loadApartments() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    String jsonStr = await rootBundle.loadString('assets/apartments.json');
+
+    Map<String, dynamic> json = jsonDecode(jsonStr);
+    List<Apartment> _apart = [];
+    for (var json_apartment in json['houses']) {
+      _apart.add(Apartment.fromjson(json_apartment));
+    }
+    setState(() {
+      apartments = _apart;
+      loading = false;
+    });
+  }
+
+
+//
+EX class Todo {
+  String what;
+  bool done;
+  Todo(this.what) : done = false;
+
+  Todo.fromJson(Map<String, dynamic> json)
+      : what = json['what'],
+        done = json['done'];
+
+  Map<String, dynamic> toJson() => {
+        'what': what,
+        'done': done,
+      };
+}
+
+class TodoListPage extends StatefulWidget {
+  @override
+  _TodoListPageState createState() => _TodoListPageState();
+}
+
+
+
+class _TodoListPageState extends State<TodoListPage> {
+  List<Todo> _todos; // Model
+
+  @override
+  void initState() {
+    _loadTodos();
+    super.initState();
+  }
+
+  Future<void> _loadTodos() async {
+    await Future.delayed(Duration(seconds: 5));
+    try {
+      Directory dir = await getApplicationDocumentsDirectory();
+      File file = File('${dir.path}/todo.json');
+      String fileContents = await file.readAsString();
+      List json = jsonDecode(fileContents);
+      List<Todo> loaded = [];
+      for (var elem in json) {
+        loaded.add(Todo.fromJson(elem));
+      }
+      super.setState(() => _todos = loaded);
+    } catch (e) {
+      print("ERROR: No he pogut llegir els todos!");
+      super.setState(() => _todos = []);
+    }
+  }
+
+  Future<void> _writeTodos() async {
+    Directory dir = await getApplicationDocumentsDirectory();
+    File file = File('${dir.path}/todo.json');
+    var json = jsonEncode(_todos);
+     print(json);
+    await file.writeAsString(json);
+  }
+
+  @override
+  void setState(fn) {
+    super.setState(fn);
+    _writeTodos();
+  }
 
 //--------------------------------------//
 
@@ -336,6 +453,35 @@ package cloudfirestore
         },
       ),
 
+
+//TEXT CONTROLER
+
+  TextEditingController _controller;
+
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+.
+.
+.
+ TextField(
+              controller: _controller,
+              onSubmitted: (text) {
+                Navigator.of(context).pop(text);
+              },
+            ),
+
+o
+
+ RaisedButton(
+              child: Icon(Icons.save),
+              onPressed: () {
+                Navigator.of(context).pop(_controller.text);
+              },
+            ),
 
 
 
