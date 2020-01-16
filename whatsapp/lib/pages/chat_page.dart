@@ -25,14 +25,27 @@ class ChatPage extends StatelessWidget {
             return Loading();
           }
 
-          return Column(
+          return Stack(
             children: <Widget>[
-              Expanded(
-                child: MessageList(messages: snapshot.data),
+              LayoutBuilder(
+                builder: (context, BoxConstraints constraints) {
+                  return Image.asset(
+                    'assets/background.jpg',
+                    width: constraints.maxWidth,
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
-              MessageBox(onSend: (text) {
-                db.sendMessage(group.id,Message(text));
-              })
+              Column(
+                children: <Widget>[
+                  Expanded(
+                    child: MessageList(messages: snapshot.data),
+                  ),
+                  MessageBox(onSend: (text) {
+                    db.sendMessage(group.id, Message(text));
+                  })
+                ],
+              ),
             ],
           );
         },
@@ -40,5 +53,3 @@ class ChatPage extends StatelessWidget {
     );
   }
 }
-
-
