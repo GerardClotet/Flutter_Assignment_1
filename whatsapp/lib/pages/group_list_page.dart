@@ -5,7 +5,7 @@ import 'package:whatsapp/widgets/group_list.dart';
 import 'package:whatsapp/widgets/loading.dart';
 import 'package:whatsapp/widgets/red_error.dart';
 
-class GrouPage extends StatelessWidget {
+class GroupListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

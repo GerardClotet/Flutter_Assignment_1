@@ -8,6 +8,13 @@ class Message {
       : id = doc.documentID,
         text = doc.data['text'],
         dateTime = (doc.data['datetime'] as Timestamp).toDate();
+
+
+Map<String,dynamic> toFirestore() =>{
+  'text' : text,
+  'datetime' : dateTime,
+};
+        Message(this.text) : dateTime = DateTime.now();
 }
 
 List<Message> toMessageList(QuerySnapshot query) {
