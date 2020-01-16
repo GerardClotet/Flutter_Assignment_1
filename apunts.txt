@@ -304,7 +304,22 @@ class _LocationsListState extends State<LocationsList> {
   }
 
 
-//
+//--------
+  Apartment.fromjson(Map<String, dynamic> json)
+      : username = json['user'],
+        loc_name = json['loc_name'],
+        description = json['description'],
+        profile_pic = json['profile_pic'],
+        big_pic = json['big_pic'],
+        desc_asset = json['descAsset'],
+        s_cost = json['cost'], //passar a int
+
+        d = json['cost'];
+
+
+}
+
+//-----
 EX class Todo {
   String what;
   bool done;
@@ -368,7 +383,7 @@ class _TodoListPageState extends State<TodoListPage> {
     _writeTodos();
   }
 
-//--------------------------------------//
+//---------------------------------------------------------------------------------//
 
 
 STREAMS
